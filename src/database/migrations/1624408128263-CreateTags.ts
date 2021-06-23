@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CrateUsers1624333149715 implements MigrationInterface {
+export class CreateTags1624408128263 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "user",
+        name: "tags",
         columns: [
           {
             name: "id",
@@ -17,21 +17,12 @@ export class CrateUsers1624333149715 implements MigrationInterface {
             type: "varchar"
           },
           {
-            name: "email",
-            type: "varchar",
-          },
-          {
-            name: "admin",
-            type: "boolean",
-            default: false
-          },
-          {
             name: "created_at",
             type: "timestamp",
             default: "now()"
           },
           {
-            name: "update",
+            name: "updated_at",
             type: "timestamp",
             default: "now()"
           }
@@ -41,7 +32,7 @@ export class CrateUsers1624333149715 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("users");
+    await queryRunner.dropTable("tags");
   }
 
 }
