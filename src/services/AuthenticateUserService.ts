@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import { UserRepositories } from '../database/repositories/UsersRepositories';
 
+import { sign } from 'jsonwebtoken';
 import { compare } from 'bcryptjs';
 interface IAuhenteticateResqueste {
   email: string;
@@ -20,6 +21,15 @@ class AuthenticateUserService {
     };
 
     const passwordMatch = await compare(password, user.password);
+    
+    const token = sign({
+      email: user.email,
+    }, "6425ddbf9cd648e1e4d33c4340d3373d", {
+      subject: user.id,
+      expiresIn: "1d"
+    });
+
+    return token;
   }
 }
 
